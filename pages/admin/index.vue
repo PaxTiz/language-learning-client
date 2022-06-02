@@ -181,5 +181,6 @@
 <script>
 export default {
   name: 'HomePage',
+  layout: 'admin',
 }
 </script>
