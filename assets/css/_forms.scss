@@ -1,7 +1,36 @@
 input {
-    @apply w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-md;
+    width: 100%;
+    padding: .5em 1em;
+    color: var(--grey-dark);
+    background-color: var(--white);
+    border: 1px solid var(--grey);
+    border-radius: .5em;
 }
 
 input:focus {
-    @apply border-blue-400 ring-blue-300 ring-opacity-40 outline-none ring;
+    border-color: var(--blue);
+    outline: none;
+}
+
+.search-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    span {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: .5em;
+
+        svg {
+            width: 18px;
+            color: var(--grey-dark);
+        }
+    }
+
+    input {
+        padding-left: 2.5em;
+    }
 }

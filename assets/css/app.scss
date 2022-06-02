@@ -1,7 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+    box-sizing: border-box;
+}
 
+@import "colors";
+@import "margin";
 @import "base";
 @import "typography";
 @import "forms";
