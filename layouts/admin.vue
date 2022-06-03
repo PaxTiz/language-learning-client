@@ -2,57 +2,57 @@
   <div id="app">
     <main class="flex">
       <div class="navbar">
-        <h2>Language Learning</h2>
-
-        <div class="search-input mt-2">
-          <span>
-            <SearchIcon />
-          </span>
-
-          <input type="text" placeholder="Search" />
-        </div>
-
-        <nav class="mt-1">
-          <a class="nav-link active" href="#">
+        <nav>
+          <a class="nav-link active" href="/admin">
             <DashboardIcon />
             <span>Dashboard</span>
           </a>
 
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/admin/languages">
             <AccountIcon />
-            <span>Accounts</span>
+            <span>Languages</span>
           </a>
 
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/admin/courses">
             <TicketIcon />
-            <span>Tickets</span>
+            <span>Courses</span>
           </a>
 
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/admin/lessons">
             <SettingsIcon />
-            <span>Settings</span>
+            <span>Lessons</span>
+          </a>
+
+          <a class="nav-link" href="/admin/questions">
+            <SettingsIcon />
+            <span>Questions</span>
           </a>
 
           <hr />
 
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/admin/posts">
             <TicketIcon />
-            <span>Tickets</span>
+            <span>Posts</span>
           </a>
 
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/admin/users">
+            <TicketIcon />
+            <span>Users</span>
+          </a>
+
+          <a class="nav-link" href="/admin/roles">
             <SettingsIcon />
-            <span>Settings</span>
+            <span>Roles</span>
           </a>
         </nav>
 
-        <div class="user mt-2">
+        <a class="user mt-2" href="/admin/me">
           <img
             src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
             alt="avatar"
           />
-          <h4>John Doe</h4>
-        </div>
+          <span>John Doe</span>
+        </a>
       </div>
 
       <div class="application">
@@ -67,7 +67,6 @@
 <script>
 import AccountIcon from '@/components/icons/Account'
 import DashboardIcon from '@/components/icons/Dashboard'
-import SearchIcon from '@/components/icons/Search'
 import SettingsIcon from '@/components/icons/Settings'
 import TicketIcon from '@/components/icons/Ticket'
 
@@ -76,7 +75,6 @@ export default {
   components: {
     AccountIcon,
     DashboardIcon,
-    SearchIcon,
     TicketIcon,
     SettingsIcon,
   },

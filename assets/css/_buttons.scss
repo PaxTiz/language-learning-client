@@ -1,0 +1,38 @@
+button {
+    padding: .5em 1px;
+    border: none;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all .3s;
+    font-weight: bold;
+
+    &.primary {
+        background-color: var(--blue-extra-light);
+        color: var(--blue);
+
+        &:hover {
+            background-color: var(--blue);
+            color: var(--blue-extra-light);
+        }
+    }
+
+    &.primary.disabled {
+        background-color: var(--blue-light);
+        color: var(--blue-extra-light);
+    }
+
+    &.danger {
+        background-color: var(--red-extra-light);
+        color: var(--red);
+
+        &:hover {
+            background-color: var(--red);
+            color: var(--red-extra-light);
+        }
+    }
+
+    &.danger.disabled {
+        background-color: var(--red-light);
+        color: var(--red-extra-light);
+    }
+}
