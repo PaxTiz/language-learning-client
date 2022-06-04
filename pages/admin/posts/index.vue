@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Posts</h1>
+    <h1 class="mb-xs">Posts</h1>
 
     <Table
       :headers="headers"

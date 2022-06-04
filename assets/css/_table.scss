@@ -1,4 +1,18 @@
 .table-container {
+    .table-actions {
+        display: flex;
+        align-items: center;
+        gap: 2em;
+
+        .batch-actions {
+            width: fit-content;
+        }
+
+        .search-input {
+            flex: 3.5;
+        }
+    }
+
     .table {
         display: flex;
         flex-direction: column;

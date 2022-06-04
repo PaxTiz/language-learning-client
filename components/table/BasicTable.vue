@@ -1,6 +1,28 @@
 <template>
   <div class="table-container">
-    <SearchInput v-if="searchable" />
+    <div class="table-actions">
+      <div class="batch-actions">
+        <div class="dropdown-button">
+          <button
+            class="primary"
+            :class="{ disabled: selectedItems.length === 0 }"
+            @click="toggleDropdownButton"
+          >
+            Batch actions ({{ selectedItems.length }} items)
+          </button>
+          <ul class="dropdown-items" :class="{ hidden: !dropdownOpen }">
+            <li>Export selected as CSV</li>
+            <li>Export selected as Excel</li>
+            <li>Export selected as JSON</li>
+            <li>Export all as CSV</li>
+            <li>Export all as Excel</li>
+            <li>Export all as JSON</li>
+            <li class="danger">Delete</li>
+          </ul>
+        </div>
+      </div>
+      <SearchInput v-if="searchable" />
+    </div>
 
     <div class="table mt-1">
       <div class="table-header">
@@ -125,6 +147,7 @@ export default {
     items: [],
     selectedItems: [],
     loading: false,
+    dropdownOpen: false,
   }),
 
   computed: {
@@ -179,6 +202,12 @@ export default {
         this.selectedItems = this.items.map((e) => e.id)
       } else {
         this.selectedItems = []
+      }
+    },
+
+    toggleDropdownButton() {
+      if (this.selectedItems.length > 0) {
+        this.dropdownOpen = !this.dropdownOpen
       }
     },
 

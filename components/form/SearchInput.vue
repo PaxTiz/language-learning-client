@@ -1,5 +1,5 @@
 <template>
-  <div class="search-input mt-2">
+  <div class="search-input">
     <span>
       <SearchIcon />
     </span>
