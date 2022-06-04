@@ -4,17 +4,37 @@
 
     <div class="table mt-1">
       <div class="table-header">
+        <span v-if="selectable" class="small-column">
+          <input type="checkbox" @change="toggleSelectedItems" />
+        </span>
         <span v-for="head in headers" :key="head.key">{{ head.title }}</span>
         <span>Actions</span>
       </div>
-      <div v-for="item in items" :key="item.id" class="table-row">
+
+      <div v-if="loading" class="table-loader">{{ loadingText }}</div>
+
+      <div
+        v-for="item in items"
+        :key="item.id"
+        class="table-row"
+        :class="{ selected: selectedItems.includes(item.id) }"
+      >
+        <span v-if="selectable" class="small-column">
+          <input
+            type="checkbox"
+            :checked="selectedItems.includes(item.id)"
+            @change="selectItem(item.id)"
+          />
+        </span>
         <span v-for="head in headers" :key="head.key">
           {{ item[head.key] }}
         </span>
         <div class="actions">
-          <button class="primary" @click="openEditPage(item.id)">Edit</button>
+          <button class="primary" @click="openEditPage(item.id)">
+            {{ editText }}
+          </button>
           <button class="danger" @click="openDeleteModal(item.id)">
-            Delete
+            {{ deleteText }}
           </button>
         </div>
       </div>
@@ -69,6 +89,10 @@ export default {
       type: Boolean,
       default: () => true,
     },
+    selectable: {
+      type: Boolean,
+      default: () => true,
+    },
     perPage: {
       type: Number,
       default: () => null,
@@ -77,12 +101,30 @@ export default {
       type: String,
       required: true,
     },
+    editText: {
+      type: String,
+      default: () => 'Edit',
+    },
+    deleteText: {
+      type: String,
+      default: () => 'Delete',
+    },
+    searchText: {
+      type: String,
+      default: () => 'Search...',
+    },
+    loadingText: {
+      type: String,
+      default: () => 'Loading...',
+    },
   },
 
   data: () => ({
     currentPage: 1,
     total: 0,
     items: [],
+    selectedItems: [],
+    loading: false,
   }),
 
   computed: {
@@ -122,6 +164,24 @@ export default {
       }
     },
 
+    selectItem(value) {
+      if (this.selectedItems.includes(value)) {
+        this.selectedItems = this.selectedItems.filter((e) => e !== value)
+      } else {
+        this.selectedItems.push(value)
+      }
+    },
+
+    toggleSelectedItems() {
+      if (this.selectedItems.length === this.items.length) {
+        this.selectedItems = []
+      } else if (this.selectedItems.length >= 0) {
+        this.selectedItems = this.items.map((e) => e.id)
+      } else {
+        this.selectedItems = []
+      }
+    },
+
     fetchData(paginate = true) {
       const url = paginate
         ? `${this.endpoint}?_start=${this.offset}&_limit=${this.perPage}`
@@ -130,7 +190,13 @@ export default {
     },
 
     callApi(url) {
-      return fetch(url).then((res) => res.json())
+      this.loading = true
+      return fetch(url)
+        .then((res) => res.json())
+        .catch(() => [])
+        .finally(() => {
+          this.loading = false
+        })
     },
 
     openEditPage(id) {
