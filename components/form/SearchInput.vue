@@ -4,7 +4,7 @@
       <SearchIcon />
     </span>
 
-    <input type="text" placeholder="Search" />
+    <input type="text" placeholder="Search" @input="onInput" />
   </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
   name: 'SearchInput',
   components: {
     SearchIcon,
+  },
+
+  methods: {
+    onInput(e) {
+      this.$emit('input', e.target.value)
+    },
   },
 }
 </script>

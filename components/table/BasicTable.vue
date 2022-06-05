@@ -21,13 +21,18 @@
           </ul>
         </div>
       </div>
-      <SearchInput v-if="searchable" />
+
+      <SearchInput v-if="searchable" @input="searchItems" />
     </div>
 
     <div class="table mt-1">
       <div class="table-header">
         <span v-if="selectable" class="small-column">
-          <input type="checkbox" @change="toggleSelectedItems" />
+          <input
+            type="checkbox"
+            :checked="!loading && selectedItems.length === items.length"
+            @change="toggleSelectedItems"
+          />
         </span>
         <span v-for="head in headers" :key="head.key">{{ head.title }}</span>
         <span>Actions</span>
@@ -36,7 +41,7 @@
       <div v-if="loading" class="table-loader">{{ loadingText }}</div>
 
       <div
-        v-for="item in items"
+        v-for="item in listItems"
         :key="item.id"
         class="table-row"
         :class="{ selected: selectedItems.includes(item.id) }"
@@ -71,7 +76,7 @@
         &lt;
       </button>
       <button
-        v-for="i in countPages"
+        v-for="i in paginationPages"
         :key="i"
         :class="{ primary: currentPage === i }"
         @click="changePage(i)"
@@ -80,7 +85,7 @@
       </button>
       <button
         class="primary"
-        :class="{ disabled: currentPage === computeCountPages }"
+        :class="{ disabled: currentPage === computePaginationPages }"
         @click="changePage(currentPage + 1)"
       >
         &gt;
@@ -148,15 +153,26 @@ export default {
     selectedItems: [],
     loading: false,
     dropdownOpen: false,
+    searchableFields: [],
+    searchQuery: '',
   }),
 
   computed: {
-    computeCountPages() {
+    listItems() {
+      return this.items.filter((e) => {
+        for (const field of this.searchableFields) {
+          if (e[field].includes(this.searchQuery)) return true
+        }
+        return false
+      })
+    },
+
+    computePaginationPages() {
       return Math.ceil(this.total / this.perPage)
     },
 
-    countPages() {
-      const count = this.computeCountPages
+    paginationPages() {
+      const count = this.computePaginationPages
       if (count >= 10) {
         const array = [1, 2, 3, '...']
         for (let i = 2; i >= 0; i--) array.push(count - i)
@@ -177,13 +193,18 @@ export default {
     await this.fetchData(false).then((items) => {
       this.total = items.length
     })
+
+    this.searchableFields = this.headers
+      .filter((e) => e.searchable)
+      .map((e) => e.key)
   },
 
   methods: {
     async changePage(i) {
-      if (i >= 1 && i <= this.computeCountPages) {
+      if (i >= 1 && i <= this.computePaginationPages) {
         this.currentPage = i
         this.items = await this.fetchData()
+        this.selectedItems = []
       }
     },
 
@@ -209,6 +230,10 @@ export default {
       if (this.selectedItems.length > 0) {
         this.dropdownOpen = !this.dropdownOpen
       }
+    },
+
+    searchItems(query) {
+      this.searchQuery = query
     },
 
     fetchData(paginate = true) {

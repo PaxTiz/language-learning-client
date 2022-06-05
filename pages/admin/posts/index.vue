@@ -30,6 +30,7 @@ export default {
       {
         key: 'title',
         title: 'title',
+        searchable: true,
       },
       {
         key: 'body',
