@@ -4,7 +4,7 @@
       <SearchIcon />
     </span>
 
-    <input type="text" placeholder="Search" @input="onInput" />
+    <input type="text" placeholder="Search" @keydown.enter="onInput" />
   </div>
 </template>
 

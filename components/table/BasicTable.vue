@@ -96,6 +96,7 @@
 
 <script>
 import SearchInput from '@/components/form/SearchInput.vue'
+import http from '@/http'
 
 export default {
   name: 'BasicTable',
@@ -122,7 +123,7 @@ export default {
     },
     perPage: {
       type: Number,
-      default: () => null,
+      default: () => 20,
     },
     endpoint: {
       type: String,
@@ -189,10 +190,7 @@ export default {
 
   async created() {
     this.items = await this.fetchData()
-
-    await this.fetchData(false).then((items) => {
-      this.total = items.length
-    })
+    this.total = await this.countData()
 
     this.searchableFields = this.headers
       .filter((e) => e.searchable)
@@ -232,21 +230,27 @@ export default {
       }
     },
 
-    searchItems(query) {
-      this.searchQuery = query
+    async searchItems(query) {
+      this.items = await this.fetchData(false, query)
+      this.total = await this.countData(query)
     },
 
-    fetchData(paginate = true) {
+    fetchData(paginate = true, query = '') {
       const url = paginate
-        ? `${this.endpoint}?_start=${this.offset}&_limit=${this.perPage}`
-        : this.endpoint
+        ? `${this.endpoint}?offset=${this.offset}&limit=${this.perPage}&q=${query}`
+        : `${this.endpoint}?q=${query}`
       return this.callApi(url)
+    },
+
+    countData(query = '') {
+      return this.callApi(`${this.endpoint}/count?name=${query}`)
     },
 
     callApi(url) {
       this.loading = true
-      return fetch(url)
-        .then((res) => res.json())
+      return http
+        .get(url)
+        .then((res) => res.data)
         .catch(() => [])
         .finally(() => {
           this.loading = false
