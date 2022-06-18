@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
+    "dev": "node server.js",
+    "build": "NODE_ENV=production nuxt build",
+    "start": "NODE_ENV=production node server.js",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
@@ -15,11 +15,12 @@
   "dependencies": {
     "axios": "^0.27.2",
     "core-js": "^3.19.3",
+    "express": "^4.18.1",
     "nuxt": "^2.15.8",
     "vue": "^2.6.14",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
-    "vuex": "^4.0.2",
+    "vuex": "^3.0.2",
     "webpack": "^4.46.0"
   },
   "devDependencies": {
