@@ -57,9 +57,9 @@
           {{ item[head.key] }}
         </span>
         <div class="actions">
-          <button class="primary" @click="openEditPage(item.id)">
+          <a class="button primary" :href="openEditPage(item.id)">
             {{ editText }}
-          </button>
+          </a>
           <button class="danger" @click="openDeleteModal(item.id)">
             {{ deleteText }}
           </button>
@@ -257,7 +257,7 @@ export default {
     },
 
     openEditPage(id) {
-      this.$router.push({ path: `${this.$route.path}/${id}` })
+      return `${this.$route.path}/${id}`
     },
 
     openDeleteModal(id) {},
