@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="alert" class="alert" :class="alert.type">
-      <span>{{ alert.text }}</span>
-      <span @click="cleanAlert">&times;</span>
-    </div>
+    <BasicAlert />
 
     <main class="flex">
       <div class="navbar">
@@ -74,26 +71,16 @@ import AccountIcon from '@/components/icons/Account'
 import DashboardIcon from '@/components/icons/Dashboard'
 import SettingsIcon from '@/components/icons/Settings'
 import TicketIcon from '@/components/icons/Ticket'
+import BasicAlert from '@/components/shared/BasicAlert'
 
 export default {
   name: 'BaseLayout',
   components: {
+    BasicAlert,
     AccountIcon,
     DashboardIcon,
     TicketIcon,
     SettingsIcon,
-  },
-
-  computed: {
-    alert() {
-      return this.$store.getters['alert/alert']
-    },
-  },
-
-  methods: {
-    cleanAlert() {
-      return this.$store.dispatch('alert/set', null)
-    },
   },
 }
 </script>
