@@ -4,8 +4,13 @@ const http = axios.create({
     baseURL: 'http://localhost:8080'
 })
 
-axios.interceptors.response.use((response) => {
+http.interceptors.response.use(response => {
+    if (process.server && process.env.NODE_ENV !== 'production' && response) {
+        /* eslint-disable no-console */
+        console.log(response.status, response.config.url)
+    }
     return response.data
 })
+
 
 export default http
