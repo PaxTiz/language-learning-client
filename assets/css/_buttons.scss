@@ -1,6 +1,10 @@
 // BASIC BUTTONS
 button,
 .button {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
     padding: .5em 1em;
     border: none;
     border-radius: .5em;
@@ -9,6 +13,10 @@ button,
     font-weight: bold;
     text-align: center;
     font-size: .9em;
+
+    &.icon {
+        padding: .5em !important;
+    }
 
     &.small {
         width: fit-content;

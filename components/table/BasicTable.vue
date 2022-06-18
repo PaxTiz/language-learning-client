@@ -38,7 +38,9 @@
         <span>Actions</span>
       </div>
 
-      <div v-if="loading" class="table-loader">{{ loadingText }}</div>
+      <div v-if="loading" class="table-loader">
+        <LoadingIndicator />
+      </div>
 
       <div
         v-for="item in listItems"
@@ -58,10 +60,10 @@
         </span>
         <div class="actions">
           <a class="button primary" :href="openEditPage(item.id)">
-            {{ editText }}
+            <PencilIcon />
           </a>
           <button class="danger" @click="openDeleteModal(item.id)">
-            {{ deleteText }}
+            <TrashIcon />
           </button>
         </div>
       </div>
@@ -69,11 +71,11 @@
 
     <div v-if="paginable" class="pagination">
       <button
-        class="primary"
+        class="primary icon"
         :class="{ disabled: currentPage === 1 }"
         @click="changePage(currentPage - 1)"
       >
-        &lt;
+        <ChevronLeft />
       </button>
       <button
         v-for="i in paginationPages"
@@ -84,11 +86,11 @@
         {{ i }}
       </button>
       <button
-        class="primary"
+        class="primary icon"
         :class="{ disabled: currentPage === computePaginationPages }"
         @click="changePage(currentPage + 1)"
       >
-        &gt;
+        <ChevronRight />
       </button>
     </div>
 
@@ -103,6 +105,11 @@
 
 <script>
 import SearchInput from '@/components/form/SearchInput.vue'
+import ChevronLeft from '@/components/icons/ChevronLeft'
+import ChevronRight from '@/components/icons/ChevronRight'
+import LoadingIndicator from '@/components/icons/LoadingIndicator'
+import PencilIcon from '@/components/icons/Pencil'
+import TrashIcon from '@/components/icons/Trash'
 import DeleteModal from '@/components/modals/DeleteModal'
 import http from '@/http'
 
@@ -111,6 +118,11 @@ export default {
   components: {
     SearchInput,
     DeleteModal,
+    PencilIcon,
+    TrashIcon,
+    LoadingIndicator,
+    ChevronLeft,
+    ChevronRight,
   },
 
   props: {
@@ -138,21 +150,9 @@ export default {
       type: String,
       required: true,
     },
-    editText: {
-      type: String,
-      default: () => 'Edit',
-    },
-    deleteText: {
-      type: String,
-      default: () => 'Delete',
-    },
     searchText: {
       type: String,
       default: () => 'Search...',
-    },
-    loadingText: {
-      type: String,
-      default: () => 'Loading...',
     },
   },
 

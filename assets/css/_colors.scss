@@ -24,19 +24,23 @@
 .primary {
     background-color: var(--blue-extra-light);
     color: var(--blue);
+    fill: var(--blue);
 
     &:hover {
         background-color: var(--blue);
         color: var(--blue-extra-light);
+        fill: var(--blue-extra-light);
     }
 }
 
 .danger {
     background-color: var(--red-extra-light);
     color: var(--red);
+    fill: var(--red);
 
     &:hover {
         background-color: var(--red);
         color: var(--red-extra-light);
+        fill: var(--red-extra-light);
     }
 }
