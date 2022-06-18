@@ -11,7 +11,7 @@
         :class="{ active: isActive('/languages') }"
         href="/admin/languages"
       >
-        <AccountIcon />
+        <FlagIcon />
         <span>Languages</span>
       </a>
 
@@ -20,7 +20,7 @@
         :class="{ active: isActive('/courses') }"
         href="/admin/courses"
       >
-        <TicketIcon />
+        <ChartIcon />
         <span>Courses</span>
       </a>
 
@@ -29,7 +29,7 @@
         :class="{ active: isActive('/lessons') }"
         href="/admin/lessons"
       >
-        <SettingsIcon />
+        <LandscapeIcon />
         <span>Lessons</span>
       </a>
 
@@ -38,7 +38,7 @@
         :class="{ active: isActive('/questions') }"
         href="/admin/questions"
       >
-        <SettingsIcon />
+        <QuestionIcon />
         <span>Questions</span>
       </a>
 
@@ -49,7 +49,7 @@
         :class="{ active: isActive('/posts') }"
         href="/admin/posts"
       >
-        <TicketIcon />
+        <PostIcon />
         <span>Posts</span>
       </a>
 
@@ -58,7 +58,7 @@
         :class="{ active: isActive('/users') }"
         href="/admin/users"
       >
-        <TicketIcon />
+        <AccountIcon />
         <span>Users</span>
       </a>
 
@@ -67,7 +67,7 @@
         :class="{ active: isActive('/roles') }"
         href="/admin/roles"
       >
-        <SettingsIcon />
+        <HierarchyIcon />
         <span>Roles</span>
       </a>
     </nav>
@@ -84,17 +84,25 @@
 
 <script>
 import AccountIcon from '@/components/icons/Account'
+import ChartIcon from '@/components/icons/Chart'
 import DashboardIcon from '@/components/icons/Dashboard'
-import SettingsIcon from '@/components/icons/Settings'
-import TicketIcon from '@/components/icons/Ticket'
+import FlagIcon from '@/components/icons/Flag'
+import HierarchyIcon from '@/components/icons/Hierarchy'
+import LandscapeIcon from '@/components/icons/Landscape'
+import PostIcon from '@/components/icons/Post'
+import QuestionIcon from '@/components/icons/Question'
 
 export default {
   name: 'AdminNavbar',
   components: {
-    AccountIcon,
     DashboardIcon,
-    TicketIcon,
-    SettingsIcon,
+    FlagIcon,
+    ChartIcon,
+    LandscapeIcon,
+    QuestionIcon,
+    PostIcon,
+    AccountIcon,
+    HierarchyIcon,
   },
 
   methods: {
