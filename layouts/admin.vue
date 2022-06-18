@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <div v-if="alert" class="alert" :class="alert.type">
+      <span>{{ alert.text }}</span>
+      <span @click="cleanAlert">&times;</span>
+    </div>
+
     <main class="flex">
       <div class="navbar">
         <nav>
@@ -77,6 +82,18 @@ export default {
     DashboardIcon,
     TicketIcon,
     SettingsIcon,
+  },
+
+  computed: {
+    alert() {
+      return this.$store.getters['alert/alert']
+    },
+  },
+
+  methods: {
+    cleanAlert() {
+      return this.$store.dispatch('alert/set', null)
+    },
   },
 }
 </script>

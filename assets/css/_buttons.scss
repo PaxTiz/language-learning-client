@@ -9,6 +9,10 @@ button,
     font-weight: bold;
     text-align: center;
 
+    &.small {
+        width: fit-content;
+    }
+
     &.primary.disabled {
         background-color: var(--blue-light);
         color: var(--blue-extra-light);

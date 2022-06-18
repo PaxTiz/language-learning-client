@@ -7,6 +7,10 @@ input {
     border-radius: .5em;
 }
 
+input:disabled {
+    background-color: var(--grey);
+}
+
 input:focus {
     border-color: var(--blue);
     outline: none;
@@ -33,4 +37,10 @@ input:focus {
     input {
         padding-left: 2.5em;
     }
+}
+
+.errors {
+    border-radius: .5em;
+    background-color: var(--red-extra-light);
+    color: var(--red);
 }
