@@ -1,0 +1,36 @@
+.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .modal {
+        width: 50%;
+        background-color: var(--white);
+        border-radius: .5em;
+        padding: 4em;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2em;
+
+        .modal-title {
+            font-size: 2em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+        }
+    }
+}
