@@ -250,7 +250,6 @@ export default {
       this.loading = true
       return http
         .get(url)
-        .then((res) => res.data)
         .catch(() => [])
         .finally(() => {
           this.loading = false
@@ -258,7 +257,7 @@ export default {
     },
 
     openEditPage(id) {
-      this.$router.push({ path: `${this.$route.path}/${id}/edit` })
+      this.$router.push({ path: `${this.$route.path}/${id}` })
     },
 
     openDeleteModal(id) {},
