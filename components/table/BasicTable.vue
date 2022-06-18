@@ -11,12 +11,12 @@
             Batch actions ({{ selectedItems.length }} items)
           </button>
           <ul class="dropdown-items" :class="{ hidden: !dropdownOpen }">
-            <li>Export selected as CSV</li>
-            <li>Export selected as Excel</li>
-            <li>Export selected as JSON</li>
-            <li>Export all as CSV</li>
-            <li>Export all as Excel</li>
-            <li>Export all as JSON</li>
+            <li @click="exportItems('csv')">Export selected as CSV</li>
+            <li @click="exportItems('excel')">Export selected as Excel</li>
+            <li @click="exportItems('json')">Export selected as JSON</li>
+            <li @click="exportItems('csv', true)">Export all as CSV</li>
+            <li @click="exportItems('excel', true)">Export all as Excel</li>
+            <li @click="exportItems('json', true)">Export all as JSON</li>
             <li class="danger">Delete</li>
           </ul>
         </div>
@@ -295,6 +295,17 @@ export default {
     closeDeleteModal() {
       this.currentId = null
       this.showDeleteModal = false
+    },
+
+    exportItems(format, all) {
+      let endpoint = `${this.endpoint}/export?format=${format}`
+      if (all) {
+        endpoint += '&all=true'
+      } else {
+        endpoint += this.selectedItems.map((e) => `&languages=${e}`)
+      }
+
+      window.open(endpoint, '_blank')
     },
   },
 }
