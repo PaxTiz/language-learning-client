@@ -1,6 +1,6 @@
 <template>
   <BasicForm>
-    <div class="errors">
+    <div v-if="errors.length > 0" class="errors">
       <ul v-for="error in beautifulErrors('languages')" :key="error">
         <li>{{ error }}</li>
       </ul>
@@ -93,7 +93,7 @@ export default {
     },
     errors: {
       type: Array,
-      required: true,
+      default: () => [],
     },
     update: {
       type: Boolean,

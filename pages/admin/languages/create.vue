@@ -4,6 +4,7 @@
     <LanguageForm
       :form="form"
       :update="false"
+      :errors="errors"
       button="Create a new language"
       @submit="onSubmit"
     />
@@ -22,6 +23,10 @@ export default {
 
   layout: 'admin',
 
+  data: () => ({
+    errors: [],
+  }),
+
   computed: {
     form() {
       return {
@@ -34,9 +39,14 @@ export default {
 
   methods: {
     async onSubmit(form) {
-      await this.$store.dispatch('languages/create', form).then(() => {
-        this.$router.push('/admin/languages')
-      })
+      await this.$store
+        .dispatch('languages/create', form)
+        .then(() => {
+          this.$router.push('/admin/languages')
+        })
+        .catch((e) => {
+          this.errors = e.errors
+        })
     },
   },
 }
