@@ -42,6 +42,7 @@ export default {
       await this.$store
         .dispatch('languages/create', form)
         .then(() => {
+          this.$store.dispatch('alert/success', 'The language has been created')
           this.$router.push('/admin/languages')
         })
         .catch((e) => {
