@@ -120,7 +120,7 @@ export default {
     },
     paginable: {
       type: Boolean,
-      default: () => false,
+      default: () => true,
     },
     searchable: {
       type: Boolean,

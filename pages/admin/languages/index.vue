@@ -6,7 +6,7 @@
       to="/languages/create"
     />
 
-    <Table :headers="headers" :endpoint="languagesEndpoint" paginable />
+    <Table :headers="headers" :endpoint="languagesEndpoint" />
   </div>
 </template>
 

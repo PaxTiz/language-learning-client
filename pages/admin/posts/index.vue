@@ -6,7 +6,6 @@
       :headers="headers"
       :per-page="10"
       endpoint="https://jsonplaceholder.typicode.com/posts"
-      paginable
     />
   </div>
 </template>
