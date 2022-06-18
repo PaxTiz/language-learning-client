@@ -1,12 +1,17 @@
 <template>
   <div>
-    <h1 class="mb-xs">Languages</h1>
+    <PageHeader
+      title="Languages"
+      button="Create a new language"
+      to="/languages/create"
+    />
 
     <Table :headers="headers" :endpoint="languagesEndpoint" paginable />
   </div>
 </template>
 
 <script>
+import PageHeader from '@/components/shared/PageHeader'
 import Table from '@/components/table/BasicTable'
 import constants from '~/utils/constants'
 
@@ -14,6 +19,7 @@ export default {
   name: 'AdminLanguages',
   components: {
     Table,
+    PageHeader,
   },
   layout: 'admin',
 
