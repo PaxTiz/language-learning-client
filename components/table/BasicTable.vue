@@ -91,17 +91,26 @@
         &gt;
       </button>
     </div>
+
+    <DeleteModal
+      title="De you want to delete this item ?"
+      :show="showDeleteModal"
+      @ok="deleteItem"
+      @cancel="closeDeleteModal"
+    />
   </div>
 </template>
 
 <script>
 import SearchInput from '@/components/form/SearchInput.vue'
+import DeleteModal from '@/components/modals/DeleteModal'
 import http from '@/http'
 
 export default {
   name: 'BasicTable',
   components: {
     SearchInput,
+    DeleteModal,
   },
 
   props: {
@@ -156,6 +165,8 @@ export default {
     dropdownOpen: false,
     searchableFields: [],
     searchQuery: '',
+    showDeleteModal: false,
+    currentId: null,
   }),
 
   computed: {
@@ -260,7 +271,31 @@ export default {
       return `${this.$route.path}/${id}`
     },
 
-    openDeleteModal(id) {},
+    openDeleteModal(id) {
+      this.currentId = id
+      this.showDeleteModal = true
+    },
+
+    async deleteItem() {
+      await http
+        .delete(`${this.endpoint}/${this.currentId}`)
+        .then(async () => {
+          this.$store.dispatch('alert/success', 'The item has been deleted')
+          this.closeDeleteModal()
+          await this.searchItems()
+        })
+        .catch(() => {
+          this.$store.dispatch(
+            'alert/danger',
+            'There was an error while deleting this item'
+          )
+        })
+    },
+
+    closeDeleteModal() {
+      this.currentId = null
+      this.showDeleteModal = false
+    },
   },
 }
 </script>
