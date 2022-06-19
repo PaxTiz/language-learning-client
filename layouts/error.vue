@@ -22,7 +22,7 @@ export default {
       if (this.error.admin) {
         return '/admin'
       }
-      return '/'
+      return this.$route.path.startsWith('/admin') ? '/admin' : '/'
     },
   },
 }
