@@ -1,10 +1,12 @@
 .alert {
+    position: sticky;
     width: 100%;
     padding: .25em 4em;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000;
 
     & span:last-child {
         cursor: pointer;

@@ -29,5 +29,9 @@ export const actions = {
 
     success ({ dispatch }, text) {
         return dispatch('set', { type: 'success', text })
+    },
+
+    danger ({ dispatch }, text) {
+        return dispatch('set', { type: 'danger', text })
     }
 }
