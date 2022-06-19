@@ -55,7 +55,6 @@
 import BasicForm from '@/components/form/BasicForm.vue'
 import formMixin from '@/mixins/form'
 import { requiredIfUpdate } from '@/utils/validations'
-import { validationMixin } from 'vuelidate'
 import { maxLength, minLength, required } from 'vuelidate/lib/validators'
 
 export default {
@@ -65,7 +64,7 @@ export default {
     BasicForm,
   },
 
-  mixins: [validationMixin, formMixin],
+  mixins: [formMixin],
 
   validations() {
     return {
@@ -86,47 +85,8 @@ export default {
     }
   },
 
-  props: {
-    form: {
-      type: Object,
-      required: true,
-    },
-    errors: {
-      type: Array,
-      default: () => [],
-    },
-    update: {
-      type: Boolean,
-      default: () => true,
-    },
-    button: {
-      type: String,
-      required: true,
-    },
-  },
-
-  data: () => ({
-    model: null,
-  }),
-
-  watch: {
-    model() {
-      this.$v.model.$reset()
-    },
-  },
-
   created() {
     this.model = Object.assign({}, this.form)
-  },
-
-  methods: {
-    submit() {
-      this.$v.model.$reset()
-      this.$v.model.$touch()
-      if (!this.$v.$anyError) {
-        this.$emit('submit', this.model)
-      }
-    },
   },
 }
 </script>
