@@ -56,7 +56,7 @@
           />
         </span>
         <span v-for="head in headers" :key="head.key">
-          {{ item[head.key] }}
+          {{ valueOf(item, head.key) }}
         </span>
         <div class="actions">
           <a class="button primary" :href="openEditPage(item.id)">
@@ -209,6 +209,9 @@ export default {
   },
 
   methods: {
+    valueOf(item, key) {
+      return key.split('.').reduce((p, c) => (p && p[c]) || null, item)
+    },
     async changePage(i) {
       if (i >= 1 && i <= this.computePaginationPages) {
         this.currentPage = i
