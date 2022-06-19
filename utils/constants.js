@@ -4,6 +4,7 @@ export default {
     apiUrl: API_URL,
 
     endpoints: {
-        languages: `${API_URL}/languages`
+        languages: `${API_URL}/languages`,
+        courses: `${API_URL}/courses`,
     }
 }
