@@ -1,44 +1,71 @@
 <template>
-  <div class="form">
-    <slot />
-  </div>
+  <LoadingOverlay :loading="isLoading">
+    <template v-if="!isLoading">
+      <div class="form">
+        <slot />
+      </div>
+    </template>
+  </LoadingOverlay>
 </template> 
 
 <script>
+import LoadingOverlay from '@/components/shared/LoadingOverlay'
+
 export default {
   name: 'BasicForm',
+
+  components: {
+    LoadingOverlay,
+  },
+
+  data: () => ({
+    isLoading: false,
+  }),
+
+  created() {
+    this.isLoading = true
+  },
+
+  mounted() {
+    this.isLoading = false
+  },
 }
 </script>
 
 <style scoped>
-.form {
+/deep/ .loader {
+  height: 300px;
+}
+/deep/ .form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.form label input {
+/deep/ .form label input,
+/deep/ .form label select {
   margin-top: 8px;
 }
 
-.form .row {
+/deep/ .form .row {
   display: flex;
   gap: 2em;
 }
-.form .row > * {
+/deep/ .form .row > * {
   width: 100%;
 }
 
-.form .error {
+/deep/ .form .error {
   color: var(--red);
 }
-.form .error input {
+/deep/ .form .error input,
+/deep/ .form .error select {
   border: 1px solid var(--red);
 }
-.form label p {
+/deep/ .form label p {
   display: none;
 }
-.form .error p {
+/deep/ .form .error p {
   display: block;
   font-size: 0.9em;
   margin-bottom: 0;
