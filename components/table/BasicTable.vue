@@ -95,7 +95,7 @@
     </div>
 
     <DeleteModal
-      title="De you want to delete this item ?"
+      title="Do you want to delete this item ?"
       :show="showDeleteModal"
       @ok="deleteItem"
       @cancel="closeDeleteModal"
@@ -306,6 +306,8 @@ export default {
       }
 
       window.open(endpoint, '_blank')
+      this.dropdownOpen = false
+      this.selectedItems = []
     },
   },
 }
