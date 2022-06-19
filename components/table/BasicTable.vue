@@ -277,19 +277,11 @@ export default {
     },
 
     async deleteItem() {
-      await http
-        .delete(`${this.endpoint}/${this.currentId}`)
-        .then(async () => {
-          this.$store.dispatch('alert/success', 'The item has been deleted')
-          this.closeDeleteModal()
-          await this.searchItems()
-        })
-        .catch(() => {
-          this.$store.dispatch(
-            'alert/danger',
-            'There was an error while deleting this item'
-          )
-        })
+      await http.delete(`${this.endpoint}/${this.currentId}`).then(async () => {
+        this.$store.dispatch('alert/success', 'The item has been deleted')
+        this.closeDeleteModal()
+        await this.searchItems()
+      })
     },
 
     closeDeleteModal() {
