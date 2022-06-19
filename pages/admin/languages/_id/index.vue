@@ -1,27 +1,23 @@
 <template>
-  <LoadingOverlay :loading="loading">
-    <template v-if="!loading">
-      <h1 class="mb-xs">Edit language {{ language.name }}</h1>
+  <div>
+    <h1 class="mb-xs">Edit language {{ language.name }}</h1>
 
-      <LanguageForm
-        :form="form"
-        :errors="errors"
-        button="Update language"
-        @submit="onSubmit"
-      />
-    </template>
-  </LoadingOverlay>
+    <LanguageForm
+      :form="form"
+      :errors="errors"
+      button="Update language"
+      @submit="onSubmit"
+    />
+  </div>
 </template>
 
 <script>
 import LanguageForm from '@/components/languages/Form.vue'
-import LoadingOverlay from '@/components/shared/LoadingOverlay.vue'
 
 export default {
   name: 'LanguageEdit',
 
   components: {
-    LoadingOverlay,
     LanguageForm,
   },
 
@@ -44,10 +40,6 @@ export default {
   }),
 
   computed: {
-    loading() {
-      return !this.language
-    },
-
     form() {
       return {
         id: this.language.id,
