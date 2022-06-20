@@ -49,8 +49,7 @@
       <div v-if="loading" class="table-loader">
         <LoadingIndicator />
       </div>
-
-      <template v-if="items.length > 0">
+      <template v-else-if="items.length > 0">
         <div
           v-for="item in items"
           :key="item.id"
