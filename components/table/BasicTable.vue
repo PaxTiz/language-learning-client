@@ -218,27 +218,26 @@ export default {
       this.total = await this.countData()
       if (this.total === 0) {
         this.items = []
-      } else if (i > 0 && i <= this.computePaginationPages) {
-        this.currentPage = i
-        this.items = await this.fetchData()
-        this.selectedItems = []
+      }
 
-        if (process.client) {
-          document.querySelector('.application').scroll({
-            top: 0,
-            behavior: 'smooth',
-          })
-        }
-      } else {
-        this.changePage(1)
+      const index = i > 0 && i <= this.computePaginationPages ? i : 1
+      this.currentPage = index
+      this.items = await this.fetchData()
+      this.selectedItems = []
+
+      if (process.client) {
+        document.querySelector('.application').scroll({
+          top: 0,
+          behavior: 'smooth',
+        })
       }
 
       const { page, query } = this.$route.query
-      if (parseInt(page) !== i || query !== this.searchQuery) {
+      if (parseInt(page) !== index || query !== this.searchQuery) {
         this.$router.replace({
           path: this.$route.path,
           query: {
-            page: i,
+            page: index,
             query: this.searchQuery,
           },
         })
