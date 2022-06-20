@@ -268,7 +268,7 @@ export default {
       }
     },
 
-    async searchItems(query) {
+    async searchItems(query = '') {
       this.searchQuery = query
       await this.changePage(1)
     },
