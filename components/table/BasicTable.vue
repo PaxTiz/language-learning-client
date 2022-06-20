@@ -224,13 +224,6 @@ export default {
       this.items = await this.fetchData()
       this.selectedItems = []
 
-      if (process.client) {
-        document.querySelector('.application').scroll({
-          top: 0,
-          behavior: 'smooth',
-        })
-      }
-
       const { page, query } = this.$route.query
       if (parseInt(page) !== index || query !== this.searchQuery) {
         this.$router.replace({
