@@ -217,11 +217,16 @@ export default {
     valueOf(item, key) {
       return key.split('.').reduce((p, c) => (p && p[c]) || null, item)
     },
+
     async changePage(i) {
       if (i >= 1 && i <= this.computePaginationPages) {
         this.currentPage = i
         this.items = await this.fetchData()
         this.selectedItems = []
+        document.querySelector('.application').scroll({
+          top: 0,
+          behavior: 'smooth',
+        })
       }
     },
 
