@@ -4,7 +4,12 @@
       <SearchIcon />
     </span>
 
-    <input type="text" placeholder="Search" @keydown.enter="onInput" />
+    <input
+      type="text"
+      placeholder="Search"
+      :value="value"
+      @keydown.enter="onInput"
+    />
   </div>
 </template>
 
@@ -15,6 +20,13 @@ export default {
   name: 'SearchInput',
   components: {
     SearchIcon,
+  },
+
+  props: {
+    value: {
+      type: String,
+      default: () => '',
+    },
   },
 
   methods: {
