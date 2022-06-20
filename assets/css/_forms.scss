@@ -5,7 +5,7 @@ select {
     color: var(--grey-dark);
     background-color: var(--white);
     border: 1px solid var(--grey);
-    border-radius: .5em;
+    border-radius: var(--radius);
 }
 
 input:disabled {
@@ -41,7 +41,7 @@ input:focus {
 }
 
 .errors {
-    border-radius: .5em;
+    border-radius: var(--radius);
     background-color: var(--red-extra-light);
     color: var(--red);
 }
