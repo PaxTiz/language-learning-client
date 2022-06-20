@@ -57,11 +57,7 @@
           :class="{ selected: selectedItems.includes(item.id) }"
         >
           <span v-if="selectable" class="small-column">
-            <input
-              type="checkbox"
-              :checked="selectedItems.includes(item.id)"
-              @change="selectItem(item.id)"
-            />
+            <input v-model="selectedItems" :value="item.id" type="checkbox" />
           </span>
           <span v-for="head in headers" :key="head.key">
             {{ valueOf(item, head.key) }}
@@ -244,14 +240,6 @@ export default {
             query: this.searchQuery,
           },
         })
-      }
-    },
-
-    selectItem(value) {
-      if (this.selectedItems.includes(value)) {
-        this.selectedItems = this.selectedItems.filter((e) => e !== value)
-      } else {
-        this.selectedItems.push(value)
       }
     },
 
