@@ -34,7 +34,11 @@
         <span v-if="selectable" class="small-column">
           <input
             type="checkbox"
-            :checked="!loading && selectedItems.length === items.length"
+            :checked="
+              !loading &&
+              items.length > 0 &&
+              selectedItems.length === items.length
+            "
             @change="toggleSelectedItems"
           />
         </span>
