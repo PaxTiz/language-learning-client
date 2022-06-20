@@ -158,10 +158,6 @@ export default {
       type: String,
       required: true,
     },
-    searchText: {
-      type: String,
-      default: () => 'Search...',
-    },
   },
 
   data: () => ({
