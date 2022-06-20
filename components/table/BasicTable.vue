@@ -205,8 +205,10 @@ export default {
   },
 
   async created() {
-    this.items = await this.fetchData()
     this.total = await this.countData()
+    if (this.total === 0) {
+      return
+    }
 
     this.searchableFields = this.headers
       .filter((e) => e.searchable)
