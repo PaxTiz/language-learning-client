@@ -278,18 +278,18 @@ export default {
       const url = paginate
         ? `${this.endpoint}?offset=${this.offset}&limit=${this.perPage}&q=${this.searchQuery}`
         : `${this.endpoint}?q=${this.searchQuery}`
-      return this.callApi(url)
+      return this.callApi(url, [])
     },
 
     countData() {
-      return this.callApi(`${this.endpoint}/count?name=${this.searchQuery}`)
+      return this.callApi(`${this.endpoint}/count?name=${this.searchQuery}`, 0)
     },
 
-    callApi(url) {
+    callApi(url, defaultValue) {
       this.loading = true
       return http
         .get(url)
-        .catch(() => [])
+        .catch(() => defaultValue)
         .finally(() => {
           this.loading = false
         })
