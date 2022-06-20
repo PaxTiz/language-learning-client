@@ -42,30 +42,35 @@
         <LoadingIndicator />
       </div>
 
-      <div
-        v-for="item in listItems"
-        :key="item.id"
-        class="table-row"
-        :class="{ selected: selectedItems.includes(item.id) }"
-      >
-        <span v-if="selectable" class="small-column">
-          <input
-            type="checkbox"
-            :checked="selectedItems.includes(item.id)"
-            @change="selectItem(item.id)"
-          />
-        </span>
-        <span v-for="head in headers" :key="head.key">
-          {{ valueOf(item, head.key) }}
-        </span>
-        <div class="actions">
-          <a class="button primary" :href="openEditPage(item.id)">
-            <PencilIcon />
-          </a>
-          <button class="danger" @click="openDeleteModal(item.id)">
-            <TrashIcon />
-          </button>
+      <template v-if="listItems.length > 0">
+        <div
+          v-for="item in listItems"
+          :key="item.id"
+          class="table-row"
+          :class="{ selected: selectedItems.includes(item.id) }"
+        >
+          <span v-if="selectable" class="small-column">
+            <input
+              type="checkbox"
+              :checked="selectedItems.includes(item.id)"
+              @change="selectItem(item.id)"
+            />
+          </span>
+          <span v-for="head in headers" :key="head.key">
+            {{ valueOf(item, head.key) }}
+          </span>
+          <div class="actions">
+            <a class="button primary" :href="openEditPage(item.id)">
+              <PencilIcon />
+            </a>
+            <button class="danger" @click="openDeleteModal(item.id)">
+              <TrashIcon />
+            </button>
+          </div>
         </div>
+      </template>
+      <div v-else class="table-row empty">
+        <p>No results</p>
       </div>
     </div>
 

@@ -67,6 +67,10 @@
             &.selected {
                 background-color: var(--grey-extra-light);
             }
+
+            &.empty {
+                justify-content: center;
+            }
         }
 
         .actions {
