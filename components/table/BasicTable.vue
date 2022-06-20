@@ -211,6 +211,9 @@ export default {
     this.searchableFields = this.headers
       .filter((e) => e.searchable)
       .map((e) => e.key)
+
+    const page = parseInt(this.$route.query.page) || 1
+    await this.changePage(page)
   },
 
   methods: {
@@ -223,10 +226,18 @@ export default {
         this.currentPage = i
         this.items = await this.fetchData()
         this.selectedItems = []
-        document.querySelector('.application').scroll({
-          top: 0,
-          behavior: 'smooth',
-        })
+        if (this.$route.query.page !== i.toString()) {
+          this.$router.replace({ path: this.$route.path, query: { page: i } })
+        }
+
+        if (process.client) {
+          document.querySelector('.application').scroll({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
+      } else {
+        this.changePage(1)
       }
     },
 
