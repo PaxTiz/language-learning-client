@@ -276,11 +276,13 @@ export default {
       await this.changePage(1)
     },
 
-    fetchData(paginate = true) {
-      const url = paginate
-        ? `${this.endpoint}?offset=${this.offset}&limit=${this.perPage}&q=${this.searchQuery}`
-        : `${this.endpoint}?q=${this.searchQuery}`
-      return this.callApi(url, [])
+    fetchData() {
+      const params = new URLSearchParams({
+        offset: this.offset,
+        limit: this.perPage,
+        q: this.searchQuery,
+      })
+      return this.callApi(`${this.endpoint}?${params}`, [])
     },
 
     countData() {
@@ -320,14 +322,14 @@ export default {
     },
 
     exportItems(format, all) {
-      let endpoint = `${this.endpoint}/export?format=${format}`
+      const params = new URLSearchParams({ format })
       if (all) {
-        endpoint += '&all=true'
+        params.set('all', true)
       } else {
-        endpoint += this.selectedItems.map((e) => `&languages=${e}`)
+        this.selectedItems.forEach((e) => params.append('languages[]', e))
       }
 
-      window.open(endpoint, '_blank')
+      window.open(`${this.endpoint}/export?${params}`, '_blank')
       this.dropdownOpen = false
       this.selectedItems = []
     },
