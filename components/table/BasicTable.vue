@@ -22,7 +22,11 @@
         </div>
       </div>
 
-      <SearchInput v-if="searchable" @input="searchItems" />
+      <SearchInput
+        v-if="searchable"
+        :value="searchQuery"
+        @input="searchItems"
+      />
     </div>
 
     <div class="table mt-1">
@@ -42,9 +46,9 @@
         <LoadingIndicator />
       </div>
 
-      <template v-if="listItems.length > 0">
+      <template v-if="items.length > 0">
         <div
-          v-for="item in listItems"
+          v-for="item in items"
           :key="item.id"
           class="table-row"
           :class="{ selected: selectedItems.includes(item.id) }"
@@ -175,15 +179,6 @@ export default {
   }),
 
   computed: {
-    listItems() {
-      return this.items.filter((e) => {
-        for (const field of this.searchableFields) {
-          if (e[field].includes(this.searchQuery)) return true
-        }
-        return false
-      })
-    },
-
     computePaginationPages() {
       return Math.ceil(this.total / this.perPage)
     },
@@ -205,15 +200,11 @@ export default {
   },
 
   async created() {
-    this.total = await this.countData()
-    if (this.total === 0) {
-      return
-    }
-
     this.searchableFields = this.headers
       .filter((e) => e.searchable)
       .map((e) => e.key)
 
+    this.searchQuery = this.$route.query.query || ''
     const page = parseInt(this.$route.query.page) || 1
     await this.changePage(page)
   },
@@ -224,13 +215,13 @@ export default {
     },
 
     async changePage(i) {
-      if (i >= 1 && i <= this.computePaginationPages) {
+      this.total = await this.countData()
+      if (this.total === 0) {
+        this.items = []
+      } else if (i > 0 && i <= this.computePaginationPages) {
         this.currentPage = i
         this.items = await this.fetchData()
         this.selectedItems = []
-        if (this.$route.query.page !== i.toString()) {
-          this.$router.replace({ path: this.$route.path, query: { page: i } })
-        }
 
         if (process.client) {
           document.querySelector('.application').scroll({
@@ -240,6 +231,17 @@ export default {
         }
       } else {
         this.changePage(1)
+      }
+
+      const { page, query } = this.$route.query
+      if (parseInt(page) !== i || query !== this.searchQuery) {
+        this.$router.replace({
+          path: this.$route.path,
+          query: {
+            page: i,
+            query: this.searchQuery,
+          },
+        })
       }
     },
 
@@ -268,19 +270,19 @@ export default {
     },
 
     async searchItems(query) {
-      this.items = await this.fetchData(false, query)
-      this.total = await this.countData(query)
+      this.searchQuery = query
+      await this.changePage(1)
     },
 
-    fetchData(paginate = true, query = '') {
+    fetchData(paginate = true) {
       const url = paginate
-        ? `${this.endpoint}?offset=${this.offset}&limit=${this.perPage}&q=${query}`
-        : `${this.endpoint}?q=${query}`
+        ? `${this.endpoint}?offset=${this.offset}&limit=${this.perPage}&q=${this.searchQuery}`
+        : `${this.endpoint}?q=${this.searchQuery}`
       return this.callApi(url)
     },
 
-    countData(query = '') {
-      return this.callApi(`${this.endpoint}/count?name=${query}`)
+    countData() {
+      return this.callApi(`${this.endpoint}/count?name=${this.searchQuery}`)
     },
 
     callApi(url) {
