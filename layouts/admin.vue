@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <BasicAlert />
+    <Spotlight />
 
     <main class="flex">
       <AdminNavbar />
@@ -17,12 +18,14 @@
 <script>
 import AdminNavbar from '@/components/shared/AdminNavbar'
 import BasicAlert from '@/components/shared/BasicAlert'
+import Spotlight from '@/components/shared/Spotlight'
 
 export default {
   name: 'BaseLayout',
   components: {
     AdminNavbar,
     BasicAlert,
+    Spotlight,
   },
 }
 </script>

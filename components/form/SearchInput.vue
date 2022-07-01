@@ -5,6 +5,7 @@
     </span>
 
     <input
+      ref="input"
       type="text"
       placeholder="Search"
       :value="value"
@@ -27,6 +28,17 @@ export default {
       type: String,
       default: () => '',
     },
+
+    focus: {
+      type: Boolean,
+      default: () => false,
+    },
+  },
+
+  mounted() {
+    if (this.focus) {
+      this.$refs.input.focus()
+    }
   },
 
   methods: {
