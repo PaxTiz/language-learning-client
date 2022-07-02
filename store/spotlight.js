@@ -24,4 +24,8 @@ export const actions = {
             })
         }
     },
+
+    close({ commit }) {
+        commit('set', { property: 'items', value: [] })
+    }
 }
