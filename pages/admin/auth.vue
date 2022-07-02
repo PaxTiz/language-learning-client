@@ -35,6 +35,10 @@ export default {
     },
   },
 
+  created() {
+    this.$store.commit('user/set', { property: 'user', value: null })
+  },
+
   methods: {
     async onSubmit(form) {
       await this.$store

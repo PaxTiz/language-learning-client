@@ -21,7 +21,6 @@ export default function ({ $axios, store, $cookies, redirect }) {
   $axios.onError((error) => {
     if (error.response.status === 401) {
       $cookies.remove("token")
-      store.commit("user/set", { property: "user", value: null })
       return redirect("/admin/auth")
     }
     if (error.response.status === 500) {
