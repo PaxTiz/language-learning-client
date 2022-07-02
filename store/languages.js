@@ -1,5 +1,3 @@
-import http from '@/http'
-
 export const state = () => ({
     languages: [],
 })
@@ -17,20 +15,20 @@ export const mutations = {
 
 export const actions = {
     findAll({ commit }) {
-        return http.get('/languages').then(languages => {
+        return this.$axios.get('/languages').then(languages => {
             commit('set', { property: 'languages', data: languages })
         })
     },
 
     findById ({ commit }, id) {
-        return http.get(`/languages/${id}`)
+        return this.$axios.get(`/languages/${id}`)
     },
 
     create ({ commit }, form) {
-        return http.post('/languages', form)
+        return this.$axios.post('/languages', form)
     },
 
     update ({ commit }, { id, form }) {
-        return http.patch(`/languages/${id}`, form)
+        return this.$axios.patch(`/languages/${id}`, form)
     }
 }

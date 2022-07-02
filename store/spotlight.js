@@ -1,5 +1,3 @@
-import http from '@/http'
-
 export const state = () => ({
     items: [],
 })
@@ -19,7 +17,7 @@ export const actions = {
         if (value.length === 0) {
             commit('set', { property: 'items', value: [] })
         } else {
-            return http.get(`/spotlight?search=${value}`).then(res => {
+            return this.$axios.get(`/spotlight?search=${value}`).then(res => {
                 commit('set', { property: 'items', value: res })
             })
         }

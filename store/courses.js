@@ -1,5 +1,3 @@
-import http from '@/http'
-
 export const state = () => ({
     courses: [],
 })
@@ -17,20 +15,20 @@ export const mutations = {
 
 export const actions = {
     findAll({ commit }) {
-        return http.get('/courses').then(courses => {
+        return this.$axios.get('/courses').then(courses => {
             commit('set', { property: 'courses', data: courses })
         })
     },
 
     findById ({ commit }, id) {
-        return http.get(`/courses/${id}`)
+        return this.$axios.get(`/courses/${id}`)
     },
 
     create ({ commit }, form) {
-        return http.post('/courses', form)
+        return this.$axios.post('/courses', form)
     },
 
     update ({ commit }, { id, form }) {
-        return http.patch(`/courses/${id}`, form)
+        return this.$axios.patch(`/courses/${id}`, form)
     }
 }

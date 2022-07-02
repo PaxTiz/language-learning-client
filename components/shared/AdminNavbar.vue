@@ -77,12 +77,13 @@
         src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
         alt="avatar"
       />
-      <span>John Doe</span>
+      <span>{{ user.username }}</span>
     </a>
   </div>
 </template>
 
 <script>
+/* eslint-disable import/order */
 import AccountIcon from '@/components/icons/Account'
 import ChartIcon from '@/components/icons/Chart'
 import DashboardIcon from '@/components/icons/Dashboard'
@@ -91,6 +92,7 @@ import HierarchyIcon from '@/components/icons/Hierarchy'
 import LandscapeIcon from '@/components/icons/Landscape'
 import PostIcon from '@/components/icons/Post'
 import QuestionIcon from '@/components/icons/Question'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AdminNavbar',
@@ -103,6 +105,12 @@ export default {
     PostIcon,
     AccountIcon,
     HierarchyIcon,
+  },
+
+  computed: {
+    ...mapGetters({
+      user: 'user/user',
+    }),
   },
 
   methods: {

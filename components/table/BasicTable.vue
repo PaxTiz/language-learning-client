@@ -119,7 +119,6 @@ import LoadingIndicator from '@/components/icons/LoadingIndicator'
 import PencilIcon from '@/components/icons/Pencil'
 import TrashIcon from '@/components/icons/Trash'
 import DeleteModal from '@/components/modals/DeleteModal'
-import http from '@/http'
 
 export default {
   name: 'BasicTable',
@@ -268,7 +267,7 @@ export default {
 
     callApi(url, defaultValue) {
       this.loading = true
-      return http
+      return this.$axios
         .get(url)
         .catch(() => defaultValue)
         .finally(() => {
@@ -286,11 +285,13 @@ export default {
     },
 
     async deleteItem() {
-      await http.delete(`${this.endpoint}/${this.currentId}`).then(async () => {
-        this.$store.dispatch('alert/success', 'The item has been deleted')
-        this.closeDeleteModal()
-        await this.searchItems()
-      })
+      await this.$axios
+        .delete(`${this.endpoint}/${this.currentId}`)
+        .then(async () => {
+          this.$store.dispatch('alert/success', 'The item has been deleted')
+          this.closeDeleteModal()
+          await this.searchItems()
+        })
     },
 
     closeDeleteModal() {
