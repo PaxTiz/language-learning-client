@@ -20,7 +20,10 @@ export default {
 
   axios: {
     baseURL: process.env.NUXT_ENV_API_URL,
+    progress: false,
   },
+
+  loading: false,
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/app.scss'],
