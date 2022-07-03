@@ -22,10 +22,6 @@ export default {
   data: () => ({
     headers: [
       {
-        key: 'id',
-        title: 'id',
-      },
-      {
         key: 'name',
         title: 'Name',
         searchable: true,

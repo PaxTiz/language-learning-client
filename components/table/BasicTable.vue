@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    <div v-if="paginable" class="pagination">
+    <div v-if="paginable && paginationPages > 0" class="pagination">
       <button
         class="primary icon"
         :class="{ disabled: currentPage === 1 }"
