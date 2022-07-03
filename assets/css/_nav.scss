@@ -1,3 +1,5 @@
+$nav-breakpoint: 800px;
+
 .navbar {
     display: flex;
     flex-direction: column;
@@ -8,6 +10,11 @@
     background-color: var(--white);
     border-right: 1px solid var(--grey);
     position: sticky;
+
+    @media screen and (max-width: $nav-breakpoint) {
+        width: 6em;
+        padding: 1em;
+    }
 
     nav {
         flex: 1;
@@ -23,6 +30,10 @@
 
         span {
             font-weight: 500;
+
+            @media screen and (max-width: $nav-breakpoint) {
+                display: none;
+            }
         }
 
         svg {
@@ -44,6 +55,14 @@
         align-items: center;
         gap: .5em;
 
+        @media screen and (max-width: $nav-breakpoint) {
+            justify-content: center;
+        }
+
+        * {
+            color: var(--grey-dark);
+        }
+
         img {
             object-fit: cover;
             margin: 0 .5em;
@@ -52,8 +71,10 @@
             border-radius: 100%;
         }
 
-        * {
-            color: var(--grey-dark);
+        span {
+            @media screen and (max-width: $nav-breakpoint) {
+                display: none;
+            }
         }
     }
 }
