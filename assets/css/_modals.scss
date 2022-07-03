@@ -8,9 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1001;
 
     .modal {
         width: 50%;
+        max-width: 500px;
         background-color: var(--white);
         border-radius: var(--radius);
         padding: 4em;
@@ -19,6 +21,10 @@
         flex-direction: column;
         justify-content: center;
         gap: 2em;
+
+        @media screen and (max-width: $base-breakpoint) {
+            width: 75%;
+        }
 
         .modal-title {
             font-size: 2em;
@@ -31,6 +37,11 @@
             justify-content: center;
             align-items: center;
             gap: 2em;
+
+            @media screen and (max-width: $base-breakpoint) {
+                flex-direction: column;
+                gap: 1em;
+            }
         }
     }
 }
