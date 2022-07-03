@@ -31,7 +31,10 @@ export default {
       )
       return { language }
     } catch (e) {
-      return error({ statusCode: e.response.status, admin: true })
+      return error({
+        statusCode: e.message === 'not_found' ? 404 : 500,
+        admin: true,
+      })
     }
   },
 

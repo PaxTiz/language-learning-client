@@ -28,7 +28,10 @@ export default {
       const course = await store.dispatch('courses/findById', route.params.id)
       return { course }
     } catch (e) {
-      return error({ statusCode: e.response.status, admin: true })
+      return error({
+        statusCode: e.message === 'not_found' ? 404 : 500,
+        admin: true,
+      })
     }
   },
 
