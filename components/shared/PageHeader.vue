@@ -1,6 +1,6 @@
 <template>
   <div class="page-header">
-    <h1 class="mb-xs">{{ title }}</h1>
+    <h1>{{ title }}</h1>
     <a v-if="button" class="button primary" :href="link">
       {{ button }}
     </a>
@@ -35,11 +35,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>

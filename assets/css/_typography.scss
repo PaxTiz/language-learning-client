@@ -14,8 +14,12 @@ h4 {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 3rem;
     font-weight: 700;
+
+    @media screen and (max-width: $base-breakpoint) {
+        font-size: 2em;
+    }
 }
 
 h2 {
@@ -24,11 +28,11 @@ h2 {
 }
 
 h3 {
-    font-size: 1.8em;
+    font-size: 1.8rem;
     font-weight: 500;
 }
 
 h4 {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: normal;
 }

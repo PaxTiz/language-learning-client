@@ -51,6 +51,11 @@ export default {
   display: flex;
   gap: 2em;
 }
+@media screen and (max-width: 800px) {
+  /deep/ .form .row {
+    flex-direction: column;
+  }
+}
 /deep/ .form .row > * {
   width: 100%;
 }

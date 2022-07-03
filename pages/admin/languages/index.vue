@@ -1,10 +1,6 @@
 <template>
   <div>
-    <PageHeader
-      title="Languages"
-      button="Create a new language"
-      to="/languages/create"
-    />
+    <PageHeader title="Languages" button="Create" to="/languages/create" />
 
     <Table :headers="headers" :endpoint="languagesEndpoint" />
   </div>

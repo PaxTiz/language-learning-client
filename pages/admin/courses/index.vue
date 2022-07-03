@@ -1,10 +1,6 @@
 <template>
   <div>
-    <PageHeader
-      title="Courses"
-      button="Create a new course"
-      to="/courses/create"
-    />
+    <PageHeader title="Courses" button="Create" to="/courses/create" />
 
     <Table :headers="headers" :endpoint="coursesEndpoint" />
   </div>

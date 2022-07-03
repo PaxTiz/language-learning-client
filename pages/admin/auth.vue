@@ -1,13 +1,15 @@
 <template>
-  <div class="container">
-    <div class="form">
-      <Form
-        :form="form"
-        :update="false"
-        :errors="errors"
-        button="Login"
-        @submit="onSubmit"
-      />
+  <div class="auth">
+    <div class="container">
+      <div class="form">
+        <Form
+          :form="form"
+          :update="false"
+          :errors="errors"
+          button="Login"
+          @submit="onSubmit"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -57,19 +59,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-}
-
-.form {
-  padding: 2em;
-  border-radius: var(--radius);
-  background-color: var(--grey-extra-light);
-}
-</style>

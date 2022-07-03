@@ -1,5 +1,3 @@
-$nav-breakpoint: 800px;
-
 .navbar {
     display: flex;
     flex-direction: column;
@@ -11,7 +9,7 @@ $nav-breakpoint: 800px;
     border-right: 1px solid var(--grey);
     position: sticky;
 
-    @media screen and (max-width: $nav-breakpoint) {
+    @media screen and (max-width: $base-breakpoint) {
         width: 6em;
         padding: 1em;
     }
@@ -31,7 +29,7 @@ $nav-breakpoint: 800px;
         span {
             font-weight: 500;
 
-            @media screen and (max-width: $nav-breakpoint) {
+            @media screen and (max-width: $base-breakpoint) {
                 display: none;
             }
         }
@@ -55,7 +53,7 @@ $nav-breakpoint: 800px;
         align-items: center;
         gap: .5em;
 
-        @media screen and (max-width: $nav-breakpoint) {
+        @media screen and (max-width: $base-breakpoint) {
             justify-content: center;
         }
 
@@ -72,7 +70,7 @@ $nav-breakpoint: 800px;
         }
 
         span {
-            @media screen and (max-width: $nav-breakpoint) {
+            @media screen and (max-width: $base-breakpoint) {
                 display: none;
             }
         }

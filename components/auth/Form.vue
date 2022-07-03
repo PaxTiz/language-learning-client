@@ -11,6 +11,7 @@
       <input id="email" v-model="model.email" type="email" />
 
       <p v-if="!$v.model.email.required">Email is required</p>
+      <p v-if="!$v.model.email.email">Email is not a valid email address</p>
     </label>
 
     <label for="password" :class="{ error: $v.model.password.$error }">
@@ -34,7 +35,7 @@
 /* eslint-disable import/order */
 import BasicForm from '@/components/form/BasicForm.vue'
 import formMixin from '@/mixins/form'
-import { required } from 'vuelidate/lib/validators'
+import { email, required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'AuthForm',
@@ -48,7 +49,7 @@ export default {
   validations() {
     return {
       model: {
-        email: { required },
+        email: { required, email },
         password: { required },
       },
     }
