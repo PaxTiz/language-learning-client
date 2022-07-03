@@ -40,6 +40,12 @@
       </label>
     </div>
 
+    <label for="flag">
+      Flag
+      <input id="flag" type="file" @input="onSelectFile" />
+    </label>
+    <img v-if="model.id" :src="flag" />
+
     <button
       class="primary small"
       :class="{ disabled: $v.model.$anyError }"
@@ -85,8 +91,29 @@ export default {
     }
   },
 
+  computed: {
+    flag() {
+      return `${process.env.NUXT_ENV_API_URL}/languages/${this.model.id}/flag`
+    },
+  },
+
   created() {
     this.model = Object.assign({}, this.form)
   },
+
+  methods: {
+    onSelectFile(e) {
+      if (e.target.files && e.target.files.length === 1) {
+        this.model.flag = e.target.files[0]
+      }
+    },
+  },
 }
 </script>
+
+<style scoped>
+img {
+  width: min-content;
+  max-width: 100%;
+}
+</style>

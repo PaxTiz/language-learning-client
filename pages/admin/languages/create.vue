@@ -33,6 +33,7 @@ export default {
         id: undefined,
         name: undefined,
         code: undefined,
+        flag: undefined,
       }
     },
   },

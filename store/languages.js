@@ -25,10 +25,21 @@ export const actions = {
     },
 
     create ({ commit }, form) {
-        return this.$axios.post('/languages', form)
+        const formData = new FormData()
+        for (const [k, v] of Object.entries(form)) {
+            formData.append(k, v)
+        }
+        return this.$axios.post('/languages', formData)
     },
 
     update ({ commit }, { id, form }) {
-        return this.$axios.patch(`/languages/${id}`, form)
+        const formData = new FormData()
+        for (const [k, v] of Object.entries(form)) {
+            formData.append(k, v)
+        }
+        if (typeof form.flag === 'string') {
+            formData.delete('flag')
+        }
+        return this.$axios.patch(`/languages/${id}`, formData)
     }
 }

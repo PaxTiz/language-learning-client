@@ -45,6 +45,7 @@ export default {
         id: this.language.id,
         name: this.language.name,
         code: this.language.code,
+        flag: this.language.flag,
       }
     },
   },
