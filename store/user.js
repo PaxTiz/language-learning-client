@@ -21,6 +21,7 @@ export const actions = {
                 path: '/',
                 maxAge: 60 * 60,
                 secure: true,
+                domain: process.env.NUXT_ENV_COOKIE_WEB_URL,
             })
         })
     },
