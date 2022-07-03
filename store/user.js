@@ -19,7 +19,8 @@ export const actions = {
             commit('set', { property: 'user', value: res.user })
             this.$cookies.set('token', res.token, {
                 path: '/',
-                maxAge: 60 * 60
+                maxAge: 60 * 60,
+                secure: true,
             })
         })
     },
