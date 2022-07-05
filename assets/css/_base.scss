@@ -12,6 +12,10 @@ hr {
     border: .5px solid var(--grey);
 }
 
+.dark hr {
+    border-color: var(--dark-grey-light);
+}
+
 a {
     text-decoration: none;
 }

@@ -45,3 +45,13 @@ input:focus {
     background-color: var(--red-extra-light);
     color: var(--red);
 }
+
+.dark {
+
+    input,
+    select {
+        background-color: var(--dark-grey-light);
+        border-color: var(--grey);
+        color: var(--grey);
+    }
+}

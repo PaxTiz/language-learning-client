@@ -118,3 +118,18 @@
         padding: .5em 1em;
     }
 }
+
+.dark {
+    .table-container {
+        .table {
+            .table-header {
+                background-color: var(--dark-grey-light);
+            }
+
+            .table-row:hover,
+            .table-row.selected {
+                background-color: var(--dark-grey-light);
+            }
+        }
+    }
+}

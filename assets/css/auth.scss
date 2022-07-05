@@ -13,3 +13,11 @@
         }
     }
 }
+
+.dark.auth {
+    background-color: var(--dark-black);
+
+    .form {
+        background-color: var(--dark-grey);
+    }
+}

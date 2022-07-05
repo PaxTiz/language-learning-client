@@ -24,3 +24,9 @@ export default {
   name: 'LoadingIndicator',
 }
 </script>
+
+<style scoped>
+.dark svg {
+  fill: var(--white);
+}
+</style>

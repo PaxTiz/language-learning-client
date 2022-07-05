@@ -45,3 +45,9 @@
         }
     }
 }
+
+.dark {
+    .modal {
+        background-color: var(--dark-grey);
+    }
+}

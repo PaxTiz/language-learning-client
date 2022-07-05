@@ -14,15 +14,10 @@ export const mutations = {
 }
 
 export const actions = {
-    auth ({ commit }, value) {
+    auth ({ commit, dispatch }, value) {
         return this.$axios.post('/auth/login', value).then(res => {
             commit('set', { property: 'user', value: res.user })
-            this.$cookies.set('token', res.token, {
-                path: '/',
-                maxAge: 60 * 60,
-                secure: true,
-                domain: process.env.NUXT_ENV_COOKIE_WEB_URL,
-            })
+            dispatch('cookies/set', { key: 'token', value: res.token }, { root: true })
         })
     },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="auth">
+  <div class="auth" :class="{ dark: currentTheme === 'dark' }">
     <div class="container">
       <div class="form">
         <Form
@@ -16,6 +16,7 @@
 
 <script>
 import Form from '@/components/auth/Form'
+import theme from '@/mixins/theme'
 
 export default {
   name: 'AuthPage',
@@ -23,6 +24,7 @@ export default {
   components: {
     Form,
   },
+  mixins: [theme],
 
   data: () => ({
     errors: [],

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <BasicAlert />
-    <Spotlight />
 
-    <main class="flex">
+    <main class="flex" :class="{ dark: currentTheme === 'dark' }">
+      <Spotlight />
       <AdminNavbar />
 
       <div class="application">
@@ -19,6 +19,7 @@
 import AdminNavbar from '@/components/shared/AdminNavbar'
 import BasicAlert from '@/components/shared/BasicAlert'
 import Spotlight from '@/components/shared/Spotlight'
+import theme from '@/mixins/theme'
 
 export default {
   name: 'BaseLayout',
@@ -27,6 +28,7 @@ export default {
     BasicAlert,
     Spotlight,
   },
+  mixins: [theme],
 }
 </script>
 

@@ -76,3 +76,14 @@
         }
     }
 }
+
+.dark .navbar {
+    background-color: var(--dark-black);
+    border-right-color: var(--dark-grey-light);
+
+    .nav-link:hover,
+    .nav-link.active {
+        background-color: var(--dark-grey);
+        color: var(--grey-light);
+    }
+}
