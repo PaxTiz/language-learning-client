@@ -27,7 +27,7 @@
         <input id="name" v-model="model.name" type="text" />
 
         <p v-if="!$v.model.name.required">Name is required</p>
-        <p v-else-if="!$v.model.name.minLength">Name can't be empty</p>
+        <p v-else-if="!$v.model.name.minLength">Name is too short</p>
       </label>
 
       <label for="code" :class="{ error: $v.model.code.$error }">
