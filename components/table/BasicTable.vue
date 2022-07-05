@@ -17,7 +17,9 @@
             <li @click="exportItems('csv', true)">Export all as CSV</li>
             <li @click="exportItems('excel', true)">Export all as Excel</li>
             <li @click="exportItems('json', true)">Export all as JSON</li>
-            <li class="danger">Delete</li>
+            <li class="danger" @click="openDeleteSelectedModal">
+              Delete selected
+            </li>
           </ul>
         </div>
       </div>
@@ -108,6 +110,13 @@
       @ok="deleteItem"
       @cancel="closeDeleteModal"
     />
+
+    <DeleteModal
+      title="Do you want to delete all selected items ?"
+      :show="showDeleteSelectedModal"
+      @ok="() => deleteItem(true)"
+      @cancel="closeDeleteModal"
+    />
   </div>
 </template>
 
@@ -169,6 +178,7 @@ export default {
     searchableFields: [],
     searchQuery: '',
     showDeleteModal: false,
+    showDeleteSelectedModal: false,
     currentId: null,
   }),
 
@@ -284,19 +294,29 @@ export default {
       this.showDeleteModal = true
     },
 
-    async deleteItem() {
-      await this.$axios
-        .delete(`${this.endpoint}/${this.currentId}`)
-        .then(async () => {
-          this.$store.dispatch('alert/success', 'The item has been deleted')
-          this.closeDeleteModal()
-          await this.searchItems()
-        })
+    openDeleteSelectedModal() {
+      this.showDeleteSelectedModal = true
+    },
+
+    async deleteItem(onlySelected = false) {
+      const url = new URLSearchParams()
+      if (onlySelected) {
+        this.selectedItems.forEach((e) => url.append('languages[]', e))
+      } else {
+        url.append('languages[]', this.currentId)
+      }
+      await this.$axios.delete(`${this.endpoint}?${url}`).then(async () => {
+        this.$store.dispatch('alert/success', 'The item has been deleted')
+        this.closeDeleteModal()
+        await this.searchItems()
+      })
     },
 
     closeDeleteModal() {
       this.currentId = null
       this.showDeleteModal = false
+      this.showDeleteSelectedModal = false
+      this.dropdownOpen = false
     },
 
     exportItems(format, all) {
