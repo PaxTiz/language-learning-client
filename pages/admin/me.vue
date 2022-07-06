@@ -39,7 +39,7 @@ export default {
         value: this.selectedTheme,
       })
       this.$store.dispatch('alert/success', 'The theme has been saved')
-      this.$forceUpdate()
+      this.$router.go(0)
     },
   },
 }
